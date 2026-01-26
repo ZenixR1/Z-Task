@@ -6,7 +6,8 @@ const timerToggle = document.getElementById('countdown');
 
 //function for the pomodoro timer
 
-
+let duration;
+duration = 25;
 
 function timer (durationInMinutes) {
     return setInterval (() => {
@@ -22,50 +23,41 @@ function timer (durationInMinutes) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
         
         timerCount.innerHTML = minutes + ':' + seconds
+
+        if (distance < 0){
+            clearInterval();
+            timerCount.innerHTML = "05:00";
+            timerID = null;
+            timerToggle.textContent = "Start";
+        }
     },1000);
 };
 
-//setInterval(timer, 1000);
 //Event listener for timerToggle
 let timerID = null;
+let isPaused = false;
+let pausedTime = "";
+
 timerToggle.addEventListener('click', () => {
     if (timerID == null){
-        let duration;
-        duration = 25;
         const durationMS = new Date().getTime() + (duration * 60 * 1000);
         timerID = timer(durationMS);
         timerToggle.textContent = "Stop"
-    } else if (timerID != null){
+    } else if (timerID != null && timerToggle.textContent === "Stop"){
+        isPaused = true;
+        pausedTime = timerCount.innerHTML;
+        timerID != null;
         clearInterval(timerID);
-        timerID = null;
-        timerToggle.textContent = "Start";
-    }
+        timerToggle.textContent = "Resume";
+    } else if (timerID != null && timerToggle.textContent === "Resume"){
+        isPaused = false;
+        const timeParts = pausedTime.split(':');
+        const minutesLeft = parseInt(timeParts[0]);
+        const secondsLeft = parseInt(timeParts[1]);
+        const durationMS = new Date().getTime() + (minutesLeft * 60 * 1000) + (secondsLeft * 1000);
+        timerID = timer(durationMS);
+        timerToggle.textContent = "Stop";
+    } 
 });
 
-
-
-
-/*timerToggle.addEventListener('click', () => {
-    if (timerID == null){
-        timerID = setInterval(function() {
-    const currentDate = new Date().getTime();
-    const distance = durationMS - currentDate;
-
-    let minutes = Math.floor(distance/1000/60) % 60;
-    let seconds = Math.floor(distance/1000) % 60;
-
-    console.log(minutes + ":" + seconds);
-
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-    
-    timerCount.innerHTML = minutes + ':' + seconds
-}, 1000);
-        timerToggle.textContent = "Stop"
-    } else if (timerID != null){
-        clearInterval(timerID);
-        timerID = null;
-        timerToggle.textContent = "Start";
-    }
-});*/
 
