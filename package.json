@@ -1,5 +1,5 @@
 {
-  "name": "test-app",
+  "name": "z-task",
   "version": "1.0.0",
   "description": "test-app",
   "main": "main.js",
@@ -11,5 +11,13 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^40.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZenixR1/Z-Task.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ZenixR1/Z-Task/issues"
+  },
+  "homepage": "https://github.com/ZenixR1/Z-Task#readme"
 }
