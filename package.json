@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/ZenixR1/Z-Task/issues"
   },
-  "homepage": "https://github.com/ZenixR1/Z-Task#readme"
+  "homepage": "https://github.com/ZenixR1/Z-Task#readme",
+  "dependencies": {
+    "electron-reload": "^2.0.0-alpha.1"
+  }
 }

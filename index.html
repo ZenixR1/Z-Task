@@ -11,12 +11,62 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
-  </head>
-  <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
-    <p id="info"></p>
-  </body>
-  <script src="./renderer.js"></script>
+    <title>Zen Task & Timer</title>
+    <link rel="stylesheet" href="./style/styles.css">
+</head>
+<body>
+    <div class="mainContainer">
+        <div class="navBar">
+            <div class="header">
+                <h2>Zen Task & Timer</h2>
+            </div>
+            <div class="loginDiv"></div>
+        </div>
+        <div class="welcomeHeaderDiv">
+            <h1 class="welcomeHeader"> Welcome, {Username}!</h1>
+            <h4 class="motd">Message of the day:</h4>
+            <p class="motdContent">I hope you have a productive day!</p>
+        </div>
+        <div class="timerDiv">
+            <div class="timer">
+                <div class="timerClock">
+                    <h2 id="timerCount">25:00</h2>
+                </div>
+                <div class="controlBar">
+                    <div class="line1div"><hr class="line1"></div>
+                    <button id="countdown">Start</button>
+                    <div class="line2div"><hr class="line2"></div>
+                </div>
+                <div class="workingOnDiv">
+                    <h2>Currently Working On:</h3>
+                    <p class="taskDisplayName"><strong>Task name here</strong></p>
+                    <p class="taskPriorityLevel">priorityLevel</p>
+                    <p class="taskDueDate"><strong>Due by: </strong>May 20th, 2025 @ 17:30</p>
+                    <p><strong>Task Summary:</strong></p>
+                    <p class="taskDisplaySummary">This section will list out your task summary</p>
+                </div>
+            </div>
+        </div>
+        <div class="tasksDiv">
+            <div class="tasks">
+                <div class="taskHeaderDiv">
+                    <div class="taskHeader">
+                        <h2 class="taskHeading">Your Tasks:</h2>
+                    </div>
+                    <div class="settingsDiv">
+                        <div class="sortButtonDiv"></div>
+                        <div class="alertButtonDiv"></div>
+                        </div>
+                </div>
+                <div class="taskContainerDiv">
+                    <ul class="taskList">
+                        <li class="taskItem"></li>
+                    </ul>
+                </div>
+                <div class="footerDiv"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/scripts/app.js" ></script>
+</body>
 </html>

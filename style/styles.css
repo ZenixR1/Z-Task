@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    font-family: monospace;
+    color: #f1f1f1;
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: #131313;
+}
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 3rem;
+}
+
+.header{
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 50px #a11199;
+    padding: 1rem;
+    background-color: #1a1a1a;
+}
+
+.loginDiv{
+    display: flex;
+    width: 5rem;
+    height: 3.5rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 50px #a11199;
+    background-color: #1a1a1a;
+}
+
+.welcomeHeaderDiv{
+    display: inline-flex;
+    flex-direction: column;
+    width:min-content;
+    align-self: center;
+    text-align: center;
+    margin-top: 2.5rem;
+    padding: 2rem;
+    border: 3px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 50px #a11199;
+    background-color: #1a1a1a;
+}
+
+.welcomeHeader{
+    text-wrap: nowrap;
+}
+
+.motd{
+    margin-top: 3rem;
+}
+
+.timerDiv{
+    display:flex;
+    width: 42rem;
+    height: 42rem;
+    align-self: center;
+    margin-top: 5rem;
+    border: 3px solid black;
+    border-radius: 50%;
+    box-shadow: 2px 2px 50px #a11199;
+    justify-content: center;
+    background-color: #1a1a1a;
+}
+
+.timer{
+display: flex;
+flex-direction: column;
+position: relative;
+top: 5.5rem;
+height: min-content;
+width: auto;
+height: 32rem;
+justify-content: space-evenly;
+align-content: center;
+}
+
+.timerClock{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.controlBar{
+    display: flex-inline;
+    align-self: center;
+    position: relative;
+    top: 2rem;
+    overflow: visible;
+    flex-wrap: nowrap;
+}
+
+.line1div{
+display: inline-flex;
+}
+.line1{
+    width: 17rem;
+    color:black;
+    border: 2px solid black;
+}
+
+#countdown{
+    display: inline-flex;
+    font-weight: 600;
+    background-color: #1a1a1a;
+    border: 2px solid black;
+    border-radius: 50%;
+    height: 5rem;
+    width: 5rem;
+    line-height: 4.3rem;
+    text-align: center;
+    padding-left: 8px;
+    box-shadow: 2px 2px 20px #a11199;
+}
+#countdown:hover{
+    background-color: #131313;
+    cursor: pointer;
+}
+
+.line2div{
+display: inline-flex;
+}
+
+.line2{
+    width: 17rem;
+    color:black;
+    border: 2px solid black;
+}
+
+.workingOnDiv{
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.taskDisplayName{
+    margin-top: 1rem;
+}
+
+.taskDueDate{
+    margin: 1rem 0;
+}
+
+.tasksDiv{
+    display: flex;
+    margin-top: 2rem;
+    width: min-content;
+    align-self: center;
+}
+
+.tasks{
+    margin-top: 2rem;
+    display: inline-flex;
+    border: 2px solid black;
+    border-radius: 2.5rem;
+    box-shadow: 4px 4px 40px #a11199;
+    width: 50rem;
+    height: 60rem;
+    margin-bottom: 5rem;
+    background-color: #1a1a1a;
+    flex-direction: column;
+}
+
+.taskHeaderDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+.taskHeader{
+    width: min-content;
+    display: flex;
+    margin: 0 auto;
+    padding: 0.5rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 20px #a11199;
+    background-color: #1a1a1a;
+    text-wrap-mode: nowrap;
+}
+
+.settingsDiv{
+    display: flex;
+    padding: .5rem;
+    justify-self:flex-end;
+}
+
+.sortButtonDiv{
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 20px #a11199;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .5rem;
+    
+}
+.sortButtonDiv:hover{
+    background-color: #131313;
+    cursor: pointer;
+}
+
+.alertButtonDiv{
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: 2px 2px 20px #a11199;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: .5rem;
+}
+.alertButtonDiv:hover{
+    background-color: #131313;
+    cursor: pointer;
+}
+
+.taskContainerDiv{
+    
+}
+
+.taskList{
+    border: 2px solid black;
+    border-radius: 6px;
+    margin: 1rem;
+}
+
+.taskItem{
+
+}
+
+.footerDiv{
+
+}
