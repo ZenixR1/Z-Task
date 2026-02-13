@@ -1,37 +1,63 @@
+
+:root{
+    --primary: rgb(1, 1, 1);
+    --onyx: #171614;
+    --carbon-black:#1D1E20;
+    --space-indigo: #2B344F;
+    --yale-blue: #064660;
+    --white: #fefcfdff;
+    --window: rgba(1,1,1, 0.95);
+}
+
 *{
     margin: 0;
     font-family: monospace;
-    color: #f1f1f1;
+    color: var(--white);
 }
-
-.mainContainer{
-    display: flex;
-    flex-direction: column;
-    background-color: #131313;
+body{
+    background-color: rgba(0,0,0,0.1);
+    backdrop-filter: blur(100px);
+    width: 100vw;
+    height: 100vh;
 }
 
 .navBar{
     display: flex;
     justify-content: space-between;
-    margin: 2rem 3rem;
+    box-shadow: 0px 0px .6rem var(--white);
+    margin-bottom: 1rem;
+    background-color: var(--window);
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: row;
 }
 
 .header{
-    border: 2px solid black;
     border-radius: 6px;
-    box-shadow: 2px 2px 50px #a11199;
     padding: 1rem;
-    background-color: #1a1a1a;
+    margin-bottom: 5px;
 }
 
 .loginDiv{
     display: flex;
-    width: 5rem;
+    width: 3.5rem;
     height: 3.5rem;
-    border: 2px solid black;
-    border-radius: 6px;
-    box-shadow: 2px 2px 50px #a11199;
-    background-color: #1a1a1a;
+    border-radius: 50%;
+    background-color: var(--onyx);
+    box-shadow: 0px 0px .6rem var(--white);
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-right: .5rem;
+}
+
+.welcomeAndTimerDiv{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 2rem;
 }
 
 .welcomeHeaderDiv{
@@ -40,12 +66,10 @@
     width:min-content;
     align-self: center;
     text-align: center;
-    margin-top: 2.5rem;
     padding: 2rem;
-    border: 3px solid black;
     border-radius: 6px;
-    box-shadow: 2px 2px 50px #a11199;
-    background-color: #1a1a1a;
+    background-color: var(--window);
+    box-shadow: 0px 0px .6rem var(--white);
 }
 
 .welcomeHeader{
@@ -62,11 +86,10 @@
     height: 42rem;
     align-self: center;
     margin-top: 5rem;
-    border: 3px solid black;
     border-radius: 50%;
-    box-shadow: 2px 2px 50px #a11199;
     justify-content: center;
-    background-color: #1a1a1a;
+    background-color: var(--window);
+    box-shadow: 0px 0px .6rem var(--white);
 }
 
 .timer{
@@ -98,7 +121,7 @@ align-content: center;
 }
 
 .line1div{
-display: inline-flex;
+    display: inline-flex;
 }
 .line1{
     width: 17rem;
@@ -109,23 +132,25 @@ display: inline-flex;
 #countdown{
     display: inline-flex;
     font-weight: 600;
-    background-color: #1a1a1a;
+    background-color: var(--primary);
     border: 2px solid black;
     border-radius: 50%;
     height: 5rem;
     width: 5rem;
     line-height: 4.3rem;
     text-align: center;
-    padding-left: 8px;
-    box-shadow: 2px 2px 20px #a11199;
+    padding-top:.2rem;
+    padding-left: .7rem;
+    padding-right: .5rem;
+    
 }
 #countdown:hover{
-    background-color: #131313;
     cursor: pointer;
+    box-shadow: 0px 0px 20px var(--white);
 }
 
 .line2div{
-display: inline-flex;
+    display: inline-flex;
 }
 
 .line2{
@@ -150,22 +175,17 @@ display: inline-flex;
 
 .tasksDiv{
     display: flex;
-    margin-top: 2rem;
     width: min-content;
     align-self: center;
-}
-
-.tasks{
-    margin-top: 2rem;
-    display: inline-flex;
-    border: 2px solid black;
-    border-radius: 2.5rem;
-    box-shadow: 4px 4px 40px #a11199;
+    box-shadow: 0px 0px .6rem var(--white);
+    padding: 2rem;
     width: 50rem;
-    height: 60rem;
-    margin-bottom: 5rem;
-    background-color: #1a1a1a;
+    height: 61rem;
+    background-color: var(--window);
+    backdrop-filter: blur(100px);
     flex-direction: column;
+    margin: .75rem;
+    border-radius: 4rem;
 }
 
 .taskHeaderDiv{
@@ -174,17 +194,18 @@ display: inline-flex;
     align-items: center;
     width: 100%;
     position: relative;
+    box-shadow: 0px 0px .6rem var(--white);
+    border-radius: 3rem;
+    background-color: var(--onyx);
 }
 .taskHeader{
     width: min-content;
     display: flex;
-    margin: 0 auto;
+    margin-left: 4rem;
     padding: 0.5rem;
-    border: 2px solid black;
     border-radius: 6px;
-    box-shadow: 2px 2px 20px #a11199;
-    background-color: #1a1a1a;
     text-wrap-mode: nowrap;
+    color: var(--primary);
 }
 
 .settingsDiv{
@@ -196,27 +217,25 @@ display: inline-flex;
 .sortButtonDiv{
     border: 2px solid black;
     border-radius: 6px;
-    box-shadow: 2px 2px 20px #a11199;
     width: 2.5rem;
     height: 2.5rem;
     margin: .5rem;
     
 }
 .sortButtonDiv:hover{
-    background-color: #131313;
+    background-color: var(--primary);
     cursor: pointer;
 }
 
 .alertButtonDiv{
     border: 2px solid black;
     border-radius: 6px;
-    box-shadow: 2px 2px 20px #a11199;
     width: 2.5rem;
     height: 2.5rem;
     margin: .5rem;
 }
 .alertButtonDiv:hover{
-    background-color: #131313;
+    background-color: var(--primary);
     cursor: pointer;
 }
 
@@ -225,15 +244,31 @@ display: inline-flex;
 }
 
 .taskList{
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
     border-radius: 6px;
     margin: 1rem;
+    padding: 0;
+    list-style: none;
 }
 
 .taskItem{
-
+    display: flex;
+    box-shadow: 0px 0px .6rem var(--white);
+    border-radius: 6px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--onyx);
+    align-self: flex-start;
+    height: 2rem;
+    width: 95%;
 }
 
-.footerDiv{
+.taskItem:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 1rem var(--white);
+}   
 
+.footerDiv{
+    
 }

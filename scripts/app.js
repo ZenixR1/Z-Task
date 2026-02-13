@@ -3,14 +3,22 @@
 const timerCount = document.getElementById('timerCount');
 //DOM for start/stop button
 const timerToggle = document.getElementById('countdown');
+//DOM for the pomodoro timer container
+const timerDiv = document.querySelector('.timerDiv');
 
 //function for the pomodoro timer
 
 let duration;
-duration = 25;
+duration = 1;
+let breakDuration;
+breakDuration = 5;
+let timerStatus = 0; //0 = stopped, 1 = running, 2 = break
+timerCount.innerHTML = `${duration}:00`;
 
 function timer (durationInMinutes) {
     return setInterval (() => {
+        timerStatus = 1;
+        
         const currentDate = new Date().getTime();
         const distance = durationInMinutes - currentDate;
 
@@ -25,10 +33,11 @@ function timer (durationInMinutes) {
         timerCount.innerHTML = minutes + ':' + seconds
 
         if (distance < 0){
-            clearInterval();
-            timerCount.innerHTML = "05:00";
+            clearInterval(timerID);
+            timerCount.innerHTML = `0${breakDuration}:00`;
             timerID = null;
             timerToggle.textContent = "Start";
+            timerStatus = 2;
         }
     },1000);
 };
@@ -39,11 +48,47 @@ let isPaused = false;
 let pausedTime = "";
 
 timerToggle.addEventListener('click', () => {
-    if (timerID == null){
+    
+    if (timerID == null && timerStatus == 0 && timerToggle.textContent === "Start"){
+        const durationMS = new Date().getTime() + (duration * 60 * 1000);
+        timerID = timer(durationMS);
+        timerDiv.style.boxShadow = "2px 2px 50px var(--yale-blue)";
+        timerToggle.textContent = "Stop"
+    } else if(timerID == null && timerStatus == 2 && timerToggle.textContent === "Start"){
+        const breakDurationMS = new Date().getTime() + (breakDuration * 60 * 1000);
+        timerID = timer(breakDurationMS);
+        timerDiv.style.boxShadow = "2px 2px 50px var(--yale-blue)";
+        timerToggle.textContent = "Stop";
+        timerStatus = 0;
+    }else if (timerID != null && timerToggle.textContent === "Stop"){
+        isPaused = true;
+        pausedTime = timerCount.innerHTML;
+        clearInterval(timerID);
+        timerID = null;
+        timerDiv.style.boxShadow = "none";
+        timerToggle.textContent = "Resume";
+    } else if (timerID != null && timerToggle.textContent === "Resume"){
+        isPaused = false;
+        const timeParts = pausedTime.split(':');
+        const minutesLeft = parseInt(timeParts[0]);
+        const secondsLeft = parseInt(timeParts[1]);
+        const durationMS = new Date().getTime() + (minutesLeft * 60 * 1000) + (secondsLeft * 1000);
+        timerID = timer(durationMS);
+        timerToggle.textContent = "Stop";
+    }
+    
+    
+    
+    
+    /*if (timerID == null){
         const durationMS = new Date().getTime() + (duration * 60 * 1000);
         timerID = timer(durationMS);
         timerToggle.textContent = "Stop"
-    } else if (timerID != null && timerToggle.textContent === "Stop"){
+    } else if(timerID == null && timerStatus == 2){
+        const breakDurationMS = new Date().getTime() + (breakDuration * 60 * 1000);
+        timerID = timer(breakDurationMS);
+        timerToggle.textContent = "Stop";
+    }else if (timerID != null && timerToggle.textContent === "Stop"){
         isPaused = true;
         pausedTime = timerCount.innerHTML;
         timerID != null;
@@ -57,7 +102,7 @@ timerToggle.addEventListener('click', () => {
         const durationMS = new Date().getTime() + (minutesLeft * 60 * 1000) + (secondsLeft * 1000);
         timerID = timer(durationMS);
         timerToggle.textContent = "Stop";
-    } 
+    }*/
 });
 
 

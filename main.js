@@ -5,12 +5,15 @@ const path = require('node:path')
 
 const createWindow = () => {
   const aWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1550,
+    height: 980,
+    transparent: true,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
-  })
+    },
+    setClassName: "z-task"}
+);
 
   aWindow.loadFile('index.html')
 }
@@ -22,4 +25,7 @@ app.whenReady().then(() => {
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
+})
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
