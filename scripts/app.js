@@ -15,6 +15,8 @@ breakDuration = 5;
 let timerStatus = 0; //0 = stopped, 1 = running, 2 = break
 timerCount.innerHTML = `${duration}:00`;
 
+
+
 function timer (durationInMinutes) {
     return setInterval (() => {
         timerStatus = 1;

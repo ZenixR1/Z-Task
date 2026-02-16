@@ -7,6 +7,9 @@
     --yale-blue: #064660;
     --white: #fefcfdff;
     --window: rgba(1,1,1, 0.95);
+    --high-priority: #ff4c4c;
+    --normal-priority: #ffb84c;
+    --low-priority: #4cff4c;
 }
 
 *{
@@ -27,6 +30,8 @@ body{
     box-shadow: 0px 0px .6rem var(--white);
     margin-bottom: 1rem;
     background-color: var(--window);
+    padding: 0.5rem;
+    border-radius: 1.5rem;
 }
 
 .mainContainer{
@@ -37,7 +42,6 @@ body{
 .header{
     border-radius: 6px;
     padding: 1rem;
-    margin-bottom: 5px;
 }
 
 .loginDiv{
@@ -51,6 +55,7 @@ body{
     align-items: center;
     align-self: center;
     margin-right: 1rem;
+    border: 1px solid var(--white);
 }
 
 .welcomeAndTimerDiv{
@@ -70,6 +75,7 @@ body{
     border-radius: 6px;
     background-color: var(--window);
     box-shadow: 0px 0px .6rem var(--white);
+    border: 1px solid var(--white);
 }
 
 .welcomeHeader{
@@ -90,6 +96,7 @@ body{
     justify-content: center;
     background-color: var(--window);
     box-shadow: 0px 0px .6rem var(--white);
+    border: 1px solid var(--white);
 }
 
 .timer{
@@ -126,14 +133,14 @@ align-content: center;
 .line1{
     width: 17rem;
     color:black;
-    border: 2px solid black;
+    border: 1px solid var(--white);
 }
 
 #countdown{
     display: inline-flex;
     font-weight: 600;
     background-color: var(--primary);
-    border: 2px solid black;
+    border: 2px solid var(--white);
     border-radius: 50%;
     height: 5rem;
     width: 5rem;
@@ -156,7 +163,7 @@ align-content: center;
 .line2{
     width: 17rem;
     color:black;
-    border: 2px solid black;
+    border: 1px solid var(--white);
 }
 
 .workingOnDiv{
@@ -186,6 +193,7 @@ align-content: center;
     flex-direction: column;
     margin: .75rem;
     border-radius: 4rem;
+    border: 1px solid var(--white);
 }
 
 .taskHeaderDiv{
@@ -197,6 +205,7 @@ align-content: center;
     box-shadow: 0px 0px .6rem var(--white);
     border-radius: 3rem;
     background-color: var(--onyx);
+    border: 1px solid var(--white);
 }
 .taskHeader{
     width: min-content;
@@ -216,31 +225,36 @@ align-content: center;
 
 .sortButtonDiv{
     border: 2px solid black;
-    border-radius: 6px;
+    border-radius: 50%;
     width: 2.5rem;
     height: 2.5rem;
     margin: .5rem;
-    
+    border: 1px solid var(--white);
 }
 .sortButtonDiv:hover{
     background-color: var(--primary);
     cursor: pointer;
+    box-shadow: 0px 0px 10px var(--white);
 }
 
-.alertButtonDiv{
+.filterButtonDiv{
     border: 2px solid black;
-    border-radius: 6px;
+    border-radius: 50%;
     width: 2.5rem;
     height: 2.5rem;
     margin: .5rem;
+    border: 1px solid var(--white);
 }
-.alertButtonDiv:hover{
+.filterButtonDiv:hover{
     background-color: var(--primary);
     cursor: pointer;
+    box-shadow: 0px 0px 10px var(--white);
 }
 
 .taskContainerDiv{
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .taskList{
@@ -250,24 +264,91 @@ align-content: center;
     margin: 1rem;
     padding: 0;
     list-style: none;
+    overflow: scroll hidden hidden;
 }
 
 .taskItem{
     display: flex;
+    flex-direction: row;
     box-shadow: 0px 0px .6rem var(--white);
     border-radius: 6px;
     margin: 0.5rem;
     padding: 0.5rem;
     background-color: var(--onyx);
     align-self: flex-start;
-    height: 2rem;
-    width: 95%;
+    height: 4rem;
+    width: 45rem;
+    border: 1px solid var(--white);
 }
 
 .taskItem:hover{
     cursor: pointer;
     box-shadow: 2px 2px 1rem var(--white);
 }   
+
+.taskItemEffortDiv{
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: var(--space-indigo);
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-left: .25rem;
+    margin-right: .25rem;
+    border: 1px solid var(--white);
+}
+
+.taskItemEffort{
+    display: flex;
+    font-size: 0.8rem;
+    align-self: center;
+}
+
+.taskItemName{
+    display: flex;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    width: max-content;
+    align-self: flex-start;
+
+}
+
+.taskItemDetailsDiv{
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: space-between;
+}
+
+.taskItemDueDate{
+    display: flex;
+    font-size: 0.8rem;
+    align-self: flex-end;
+    margin-left: 20rem;
+}
+
+.taskItemPriorityDiv{
+    display: flex;
+    width: 3.5rem;
+    height: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--high-priority);
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-left: auto;
+    margin-right: .25rem;
+    border: 1px solid var(--white);
+}
+
+.taskItemPriority{
+    display: flex;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 
 .footerDiv{
     
