@@ -69,7 +69,7 @@ timerToggle.addEventListener('click', () => {
         timerID = null;
         timerDiv.style.boxShadow = "none";
         timerToggle.textContent = "Resume";
-    } else if (timerID != null && timerToggle.textContent === "Resume"){
+    } else if (timerID == null && timerToggle.textContent === "Resume"){
         isPaused = false;
         const timeParts = pausedTime.split(':');
         const minutesLeft = parseInt(timeParts[0]);
@@ -77,6 +77,7 @@ timerToggle.addEventListener('click', () => {
         const durationMS = new Date().getTime() + (minutesLeft * 60 * 1000) + (secondsLeft * 1000);
         timerID = timer(durationMS);
         timerToggle.textContent = "Stop";
+        timerDiv.style.boxShadow = "2px 2px 50px var(--yale-blue)";
     }
     
     
