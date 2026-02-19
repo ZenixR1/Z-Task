@@ -309,8 +309,8 @@ align-content: center;
 
 .taskItemEffortDiv{
     display: flex;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.75rem;
+    height: 3.75rem;
     border-radius: 50%;
     background-color: var(--space-indigo);
     justify-content: center;
@@ -371,6 +371,159 @@ align-content: center;
     font-weight: 600;
 }
 
+.taskAddModalDiv{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskAddModal{
+    display: flex;
+    flex-direction: row;
+    width: 50rem;
+    height: 50rem;
+    background-color: var(--window);
+    box-shadow: 0px 0px 1rem var(--white);
+    border-radius: 2rem;
+    border: 1px solid var(--white);
+}
+
+.taskAddDiv{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 2rem;
+}
+
+.taskAddLabel{
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-right: 1rem;
+}
+
+.taskAddInput{
+    width: 20rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+    text-align: start;
+    color: var(--primary);
+    position: relative;
+    left: 1.6rem;
+}
+
+.taskAddNameDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: start;
+    margin-bottom: 2rem;
+}
+
+.taskAddDescLabel{
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-right: 1rem;
+    align-self: flex-start;
+}
+
+.taskAddDescInput{
+        width: 35rem;
+        height: 20rem;
+        font-size: 1.25rem;
+        text-align: start;
+        color: var(--primary);
+        position: relative;
+        right: 3.5rem;
+}
+
+.taskAddDescDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: start;
+    margin-bottom: 1rem;
+}
+
+.taskAddEffortLabel{
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-right: 1rem;
+}
+
+.taskAddEffortInput{
+    width: 4.25rem;
+    height: 1.5rem;
+    font-size: 1.25rem;
+    text-align: center;
+    color: var(--primary);
+}   
+
+.taskAddEffortSpan{
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-left: 0.5rem;
+}
+
+.taskAddEffortDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.taskAddSubmit{
+    width: 8rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--white);
+    background-color: var(--onyx);
+    color: var(--white);
+    font-size: 1.25rem;
+    margin-top: 2rem;
+}
+.taskAddSubmit:hover{
+    background-color: var(--primary);
+    cursor: pointer;
+    box-shadow: 0px 0px 10px var(--white);
+}
+
+.taskAddCloseButton{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: var(--onyx);
+    color: var(--white);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    justify-self: flex-start;
+    align-items: center;
+    align-self: flex-end;
+    border: 1px solid var(--white);
+    position: relative;
+    bottom: 5.5rem;
+    right: 2rem;
+}
+
+.taskAddCloseButton:hover{
+    background-color: var(--primary);
+    cursor: pointer;
+    box-shadow: 0px 0px 10px var(--white);
+}
 
 .footerDiv{
     
