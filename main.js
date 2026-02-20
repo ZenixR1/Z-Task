@@ -9,6 +9,9 @@ const createWindow = () => {
     height: 980,
     transparent: true,
     frame: false,
+    titleBarStyle: 'hiddenInset',
+    movable: true,
+    darkTheme: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },

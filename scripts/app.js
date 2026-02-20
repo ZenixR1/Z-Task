@@ -85,8 +85,7 @@ timerToggle.addEventListener('click', () => {
     }
 });
 
-addTaskButton.addEventListener('click', () => {
-
+function createTaskModal(taskName, taskDescription, taskEffort){
         taskAddModalDiv = document.createElement('div');
         taskAddModalDiv.classList.add('taskAddModalDiv');
 
@@ -103,6 +102,9 @@ addTaskButton.addEventListener('click', () => {
         taskAddInput = document.createElement('input');
         taskAddInput.classList.add('taskAddInput');
         taskAddInput.setAttribute('placeholder', 'Add Task Name Here');
+        if (taskName !== undefined) {
+            taskAddInput.value = taskName;
+        }
 
         taskAddNameDiv = document.createElement('div');
         taskAddNameDiv.classList.add('taskAddNameDiv');
@@ -116,6 +118,9 @@ addTaskButton.addEventListener('click', () => {
         taskAddDescInput = document.createElement('input');
         taskAddDescInput.classList.add('taskAddDescInput');
         taskAddDescInput.setAttribute('placeholder', 'Add Task Description Here');
+        if (taskDescription !== undefined) {
+            taskAddDescInput.value = taskDescription;
+        }
 
         taskAddDescDiv = document.createElement('div');
         taskAddDescDiv.classList.add('taskAddDescDiv');
@@ -134,10 +139,21 @@ addTaskButton.addEventListener('click', () => {
         taskAddEffortInput.setAttribute('value', '1');
         taskAddEffortInput.classList.add('taskAddEffortInput');
         taskAddEffortInput.setAttribute('placeholder', 'x Hrs');
+        if (taskEffort !== undefined) {
+            taskAddEffortInput.value = taskEffort;
+        }
 
         taskAddEffortSpan = document.createElement('span');
         taskAddEffortSpan.classList.add('taskAddEffortSpan');
         taskAddEffortSpan.textContent = 'hrs';
+
+        taskAddDueDateLabel = document.createElement('h2');
+        taskAddDueDateLabel.classList.add('taskAddDueDateLabel');
+        taskAddDueDateLabel.textContent = 'Task Due Date:';
+
+        taskAddDueDateInput = document.createElement('input');
+        taskAddDueDateInput.setAttribute('type', 'datetime-local');
+        taskAddDueDateInput.classList.add('taskAddDueDateInput');
 
         taskAddEffortDiv = document.createElement('div');
         taskAddEffortDiv.classList.add('taskAddEffortDiv');
@@ -165,8 +181,15 @@ addTaskButton.addEventListener('click', () => {
         taskAddModalDiv.appendChild(taskAddModal);
         document.body.appendChild(taskAddModalDiv);
 
+        return taskAddInput, taskAddDescInput, taskAddEffortInput;
+}
+
+addTaskButton.addEventListener('click', () => {
+            createTaskModal();
+
         taskAddSubmit.addEventListener('click', (event) => {
             const taskName = taskAddInput.value.trim();
+            const taskDescription = taskAddDescInput.value.trim();
             const taskEffort = taskAddEffortInput.value.trim();
             if (taskName !== '') {
                 const taskItem = document.createElement('li');
