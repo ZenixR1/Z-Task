@@ -9,6 +9,8 @@ const timerDiv = document.querySelector('.timerDiv');
 const addTaskButton = document.getElementById('addTaskButton');
 //DOM for the TaskList container
 const taskList = document.querySelector('.taskList');
+//DOM for the EditTaskButton
+const editTaskButton = document.querySelector('.editTaskButton');
 
 //function for the pomodoro timer
 
@@ -154,6 +156,14 @@ function createTaskModal(taskName, taskDescription, taskEffort){
         taskAddDueDateInput = document.createElement('input');
         taskAddDueDateInput.setAttribute('type', 'datetime-local');
         taskAddDueDateInput.classList.add('taskAddDueDateInput');
+        if (taskDueDate !== undefined) {
+            taskAddDueDateInput.value = taskDueDate;
+        }
+
+        taskAddDueDateDiv = document.createElement('div');
+        taskAddDueDateDiv.classList.add('taskAddDueDateDiv');
+        taskAddDueDateDiv.appendChild(taskAddDueDateLabel);
+        taskAddDueDateDiv.appendChild(taskAddDueDateInput);
 
         taskAddEffortDiv = document.createElement('div');
         taskAddEffortDiv.classList.add('taskAddEffortDiv');
@@ -175,22 +185,21 @@ function createTaskModal(taskName, taskDescription, taskEffort){
         taskAddDiv.appendChild(taskAddCloseButton);
         taskAddDiv.appendChild(taskAddNameDiv);
         taskAddDiv.appendChild(taskAddDescDiv);
-        taskAddDiv.appendChild(taskAddEffortDiv);
+        taskAddDiv.appendChild(taskAddEffortDiv);;
+        taskAddDiv.appendChild(taskAddDueDateDiv)
         taskAddDiv.appendChild(taskAddSubmit);
         taskAddModal.appendChild(taskAddDiv);
         taskAddModalDiv.appendChild(taskAddModal);
         document.body.appendChild(taskAddModalDiv);
 
-        return taskAddInput, taskAddDescInput, taskAddEffortInput;
+        return taskAddInput, taskAddDescInput, taskAddEffortInput, taskAddDueDateInput;
 }
 
-addTaskButton.addEventListener('click', () => {
-            createTaskModal();
-
-        taskAddSubmit.addEventListener('click', (event) => {
-            const taskName = taskAddInput.value.trim();
-            const taskDescription = taskAddDescInput.value.trim();
-            const taskEffort = taskAddEffortInput.value.trim();
+function createTaskItem(taskName, taskDescription, taskEffort, taskDueDate){
+            taskName = taskAddInput.value.trim();
+            taskDescription = taskAddDescInput.value.trim();
+            taskEffort = taskAddEffortInput.value.trim();
+            taskDueDate = taskAddDueDateInput.value.trim();
             if (taskName !== '') {
                 const taskItem = document.createElement('li');
                 taskItem.classList.add('taskItem');
@@ -198,21 +207,18 @@ addTaskButton.addEventListener('click', () => {
 
                 const taskItemEffortDiv = document.createElement('div');
                 taskItemEffortDiv.classList.add('taskItemEffortDiv');
+
                 const taskItemEffort = document.createElement('p');
                 taskItemEffort.classList.add('taskItemEffort');
-                taskItemEffort.textContent = `${taskEffort}hrs`;
+                taskItemEffort.textContent = `${taskEffort}hr`;
                 taskItemEffortDiv.appendChild(taskItemEffort);
 
-                const taskItemDetailsDiv = document.createElement('div');
-                taskItemDetailsDiv.classList.add('taskItemDetailsDiv');
                 const taskItemName = document.createElement('h3');
                 taskItemName.classList.add('taskItemName');
                 taskItemName.textContent = taskName;
-                const taskItemDueDate = document.createElement('p');
-                taskItemDueDate.classList.add('taskItemDueDate');
-                taskItemDueDate.textContent = 'Due: 05/20/25 @ 17:30';
-                taskItemDetailsDiv.appendChild(taskItemName);
-                taskItemDetailsDiv.appendChild(taskItemDueDate);
+
+                const taskItemDetailsDiv = document.createElement('div');
+                taskItemDetailsDiv.classList.add('taskItemDetailsDiv');
 
                 const taskItemPriorityDiv = document.createElement('div');
                 taskItemPriorityDiv.classList.add('taskItemPriorityDiv');
@@ -221,58 +227,53 @@ addTaskButton.addEventListener('click', () => {
                 taskItemPriority.textContent = 'High';
                 taskItemPriorityDiv.appendChild(taskItemPriority);
 
+                const taskItemDueDate = document.createElement('p');
+                taskItemDueDate.classList.add('taskItemDueDate');
+                taskItemDueDate.textContent = `Due: ${taskDueDate}`;
+                
+                taskItemDetailsDiv.appendChild(taskItemPriorityDiv);
+                taskItemDetailsDiv.appendChild(taskItemDueDate);
+
+                const taskEditButton = document.createElement('button');
+                taskEditButton.classList.add('editTaskButton');
+                taskEditButtonIcon = document.createElement('i');
+                taskEditButtonIcon.classList.add('fa-solid', 'fa-pen-to-square', 'editIcon');
+                taskEditButton.appendChild(taskEditButtonIcon);
+                taskEditButton.addEventListener('click', () => {
+                    taskEditName = taskItemName.textContent;
+                    taskEditEffort = taskItemEffort.textContent.replace('hr', '').trim();
+                    taskEditDueDate = taskItemDueDate.textContent.replace('Due: ', '').trim();
+                    //taskEditDesc = editTaskButton.previousElementSibling.textContent();
+                    createTaskModal(taskEditName, taskDescription, taskEditEffort, taskEditDueDate);
+                });
+
                 taskItem.appendChild(taskItemEffortDiv);
+                taskItem.appendChild(taskItemName);
                 taskItem.appendChild(taskItemDetailsDiv);
-                taskItem.appendChild(taskItemPriorityDiv);
+                taskItem.appendChild(taskEditButton);
 
                 taskList.appendChild(taskItem);
             }
+}
+
+editTaskButton.addEventListener('click', () => {
+    taskEditName = editTaskButton.previousElementSibling.previousElementSibling.textContent;
+    taskEditEffort = editTaskButton.previousElementSibling.previousElementSibling.previousElementSibling.textContent.replace('hr', '').trim();
+    console.log();
+    //taskEditDesc = editTaskButton.previousElementSibling.textContent();
+    createTaskModal(taskEditName,"placeholder",taskEditEffort)
+});
+
+addTaskButton.addEventListener('click', () => {
+            createTaskModal();
+
+        taskAddSubmit.addEventListener('click', (event) => {
+            createTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddEffortInput.value.trim(), taskAddDueDateInput.value.trim());
+
             document.body.removeChild(taskAddModalDiv);
         });
 
 });
-
-/*.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter' && taskInput.value.trim() !== '') {
-        console.log('Enter key pressed');
-        const taskName = taskInput.value.trim();
-        const taskItem = document.createElement('li');
-        taskItem.classList.add('taskItem');
-        taskItem.setAttribute('draggable', 'true');
-
-        const taskItemEffortDiv = document.createElement('div');
-        taskItemEffortDiv.classList.add('taskItemEffortDiv');
-        const taskItemEffort = document.createElement('p');
-        taskItemEffort.classList.add('taskItemEffort');
-        taskItemEffort.textContent = '3hr';
-        taskItemEffortDiv.appendChild(taskItemEffort);
-
-        const taskItemDetailsDiv = document.createElement('div');
-        taskItemDetailsDiv.classList.add('taskItemDetailsDiv');
-        const taskItemName = document.createElement('h3');
-        taskItemName.classList.add('taskItemName');
-        taskItemName.textContent = taskName;
-        const taskItemDueDate = document.createElement('p');
-        taskItemDueDate.classList.add('taskItemDueDate');
-        taskItemDueDate.textContent = 'Due: 05/20/25 @ 17:30';
-        taskItemDetailsDiv.appendChild(taskItemName);
-        taskItemDetailsDiv.appendChild(taskItemDueDate);
-
-        const taskItemPriorityDiv = document.createElement('div');
-        taskItemPriorityDiv.classList.add('taskItemPriorityDiv');
-        const taskItemPriority = document.createElement('p');
-        taskItemPriority.classList.add('taskItemPriority');
-        taskItemPriority.textContent = 'High';
-        taskItemPriorityDiv.appendChild(taskItemPriority);
-
-        taskItem.appendChild(taskItemEffortDiv);
-        taskItem.appendChild(taskItemDetailsDiv);
-        taskItem.appendChild(taskItemPriorityDiv);
-
-        //taskList.appendChild(taskItem);
-        taskList.replaceWith(taskItem);
-    }
-});*/
 
 
 

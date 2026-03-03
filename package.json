@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ZenixR1/Z-Task#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "electron-reload": "^2.0.0-alpha.1"
   }
 }
