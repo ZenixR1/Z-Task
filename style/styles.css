@@ -7,15 +7,14 @@
     --yale-blue: #064660;
     --white: #fefcfdff;
     --window: rgba(1,1,1, 0.95);
-    --high-priority: #ff4c4c;
-    --normal-priority: #ffb84c;
-    --low-priority: #4cff4c;
+    --high-priority: #bd3a3a;
+    --normal-priority: #e7b900;
+    --low-priority: #00a800;
 }
 
 *{
     margin: 0;
     font-family: monospace;
-    color: var(--white);
 }
 body{
     background-color: rgba(0,0,0,0.1);
@@ -33,6 +32,7 @@ body{
     padding: 0.5rem;
     padding-top: 1.25rem;
     border-radius: 1.5rem;
+    color: var(--white);
 }
 
 .mainContainer{
@@ -64,6 +64,7 @@ body{
     flex-direction: column;
     width: 50%;
     padding: 2rem;
+    color: var(--white);
 }
 
 .welcomeHeaderDiv{
@@ -195,6 +196,7 @@ align-content: center;
     margin: .75rem;
     border-radius: 4rem;
     border: 1px solid var(--white);
+    color: var(--white);
 }
 
 .taskHeaderDiv{
@@ -207,6 +209,7 @@ align-content: center;
     border-radius: 3rem;
     background-color: var(--onyx);
     border: 1px solid var(--white);
+    color: var(--white);
 }
 .taskHeader{
     width: min-content;
@@ -215,7 +218,7 @@ align-content: center;
     padding: 0.5rem;
     border-radius: 6px;
     text-wrap-mode: nowrap;
-    color: var(--primary);
+    color: var(--white);
 }
 
 #addTaskButton{
@@ -232,6 +235,7 @@ align-content: center;
     margin-right: 2rem;
     border: 1px solid var(--white);
     font-size: 2rem;
+    color: var(--white);
 }
 #addTaskButton:hover{
     background-color: var(--primary);
@@ -298,7 +302,7 @@ align-content: center;
     padding: 0.5rem;
     background-color: var(--onyx);
     align-self: flex-start;
-    height: 4rem;
+    height: 4.5rem;
     width: 45rem;
     border: 1px solid var(--white);
 }
@@ -335,7 +339,7 @@ align-content: center;
     width: max-content;
     align-self: flex-start;
     position: relative;
-    top: 1rem;
+    top: 1.3rem;
 }
 
 .taskItemDetailsDiv{
@@ -357,8 +361,8 @@ align-content: center;
 
 .taskItemPriorityDiv{
     display: flex;
-    width: 3.5rem;
-    height: 1.5rem;
+    width: 4.5rem;
+    height: 1.75rem;
     border-radius: 0.5rem;
     background-color: var(--high-priority);
     justify-content: center;
@@ -373,6 +377,7 @@ align-content: center;
     display: flex;
     font-size: 1rem;
     font-weight: 600;
+    padding:0.25rem;
 }
 
 .editTaskButton{
@@ -385,13 +390,35 @@ align-content: center;
     justify-content: center;
     align-items: center;
     align-self: center;
-    margin-right: 1rem;
+    margin-right: .5rem;
     border: 1px solid var(--white);
     font-size: 1.25rem;
+    color: var(--white);
 }
 .editTaskButton:hover{
     cursor: pointer;
     box-shadow: 0px 0px 1rem var(--white);
+    background-color: var(--primary);
+}
+
+.deleteTaskButton{
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+    background-color: var(--onyx);
+    box-shadow: 0px 0px .6rem var(--white);
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    border: 1px solid var(--white);
+    font-size: 1rem;
+    color: var(--white);
+}
+.deleteTaskButton:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 1rem var(--white);
+    background-color: var(--primary);
 }
 
 .taskAddModalDiv{
@@ -479,6 +506,25 @@ align-content: center;
     margin-bottom: 1rem;
 }
 
+.taskAddDueDateLabel{
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-right: 1rem;
+}
+
+.taskAddDueDateInput{
+    color:var(--primary)
+}
+
+.taskAddDueDateDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: start;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .taskAddEffortLabel{
     font-size: 1.5rem;
     color: var(--white);
@@ -508,23 +554,44 @@ align-content: center;
     margin-bottom: 1rem;
 }
 
-.taskAddDueDateLabel{
+.taskAddPriorityLabel{
     font-size: 1.5rem;
     color: var(--white);
-    margin-right: 1rem;
+    margin-right: 2.15rem;
 }
 
-.taskAddDueDateInput{
-    color:var(--primary)
+.taskAddPrioritySelect{
+    width: 8rem;
+    height: 2rem;
+    font-size: 1.25rem;
+    color: var(--primary);
+    text-align: center;
+    position: relative;
+    right: 1.2rem;
 }
 
-.taskAddDueDateDiv{
+.taskAddPriorityDiv{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-self: start;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+.green{
+    background-color: var(--low-priority);
+    color: var(--primary);
+}
+
+.yellow{
+    background-color: var(--normal-priority);
+    color: var(--primary);
+}
+
+.red{
+    background-color: var(--high-priority);
+    color: var(--primary);
 }
 
 .taskAddSubmit{
@@ -557,8 +624,8 @@ align-content: center;
     align-self: flex-end;
     border: 1px solid var(--white);
     position: relative;
-    bottom: 4.5rem;
-    right: 2.35rem;
+    bottom: 2.85rem;
+    right: 2.45rem;
 }
 
 .taskAddCloseButton:hover{
@@ -566,6 +633,8 @@ align-content: center;
     cursor: pointer;
     box-shadow: 0px 0px 10px var(--white);
 }
+
+
 
 .footerDiv{
     
