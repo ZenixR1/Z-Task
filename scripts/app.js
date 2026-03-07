@@ -277,8 +277,7 @@ function createTaskItem(taskName, taskDescription, taskEffort, taskDueDate, task
         taskDeleteButtonIcon.classList.add('fa-solid', 'fa-trash', 'deleteIcon');
         taskDeleteButton.appendChild(taskDeleteButtonIcon);
         taskDeleteButton.addEventListener('click', () => {
-            taskList.removeChild(taskItem);
-            indexTasks();
+            deleteTaskItemModal(taskItem);
         });
 
         taskItem.appendChild(taskItemEffortDiv);
@@ -312,7 +311,71 @@ addTaskButton.addEventListener('click', () => {
 
 });
 
+function deleteTaskItemModal(taskItem){
+    const deleteModalDiv = document.createElement('div');
+    deleteModalDiv.classList.add('deleteModalDiv');
 
+    const deleteModal = document.createElement('div');
+    deleteModal.classList.add('deleteModal');
+
+    const deleteMessage = document.createElement('p');
+    deleteMessage.classList.add('deleteMessage');
+    deleteMessage.textContent = 'Are you sure you want to delete this task?';
+
+    const deleteConfirmButton = document.createElement('button');
+    deleteConfirmButton.classList.add('deleteConfirmButton');
+    deleteConfirmButton.textContent = 'Yes';
+    deleteConfirmButton.addEventListener('click', () => {
+        taskList.removeChild(taskItem);
+        document.body.removeChild(deleteModalDiv);
+        indexTasks();
+    });
+
+    const deleteCancelButton = document.createElement('button');
+    deleteCancelButton.classList.add('deleteCancelButton');
+    deleteCancelButton.textContent = 'No';
+    deleteCancelButton.addEventListener('click', () => {
+        document.body.removeChild(deleteModalDiv);
+    });
+
+    deleteModal.appendChild(deleteMessage);
+    deleteModal.appendChild(deleteConfirmButton);
+    deleteModal.appendChild(deleteCancelButton);
+    deleteModalDiv.appendChild(deleteModal);
+    document.body.appendChild(deleteModalDiv);
+}
+
+function taskItemDragAndDrop(){
+    const taskItems = document.querySelectorAll('li.taskItem');
+
+    taskItems.forEach(taskItem => {
+        taskItem.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', e.target.getAttribute('index'));
+        });
+    });
+
+    taskList.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    taskList.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const draggedIndex = e.dataTransfer.getData('text/plain');
+        const target = e.target.closest('li.taskItem');
+        if (target && target.getAttribute('index') !== draggedIndex) {
+            const draggedItem = document.querySelector(`li.taskItem[index='${draggedIndex}']`);
+            const targetIndex = target.getAttribute('index');
+            if (draggedItem && targetIndex !== null) {
+                if (draggedIndex < targetIndex) {
+                    target.insertAdjacentElement('afterend', draggedItem);
+                } else {
+                    target.insertAdjacentElement('beforebegin', draggedItem);
+                }
+                indexTasks();
+            }
+        }
+    });
+}
 
 function indexTasks(){
     const taskItems = document.querySelectorAll('li.taskItem');
@@ -326,6 +389,7 @@ function indexTasks(){
             taskItems[j].setAttribute('index', j);
         }
     }
+    taskItemDragAndDrop();
 }
 
 
