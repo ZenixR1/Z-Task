@@ -418,10 +418,9 @@ function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
         taskEditButton.appendChild(taskEditButtonIcon);
         taskEditButton.addEventListener('click', () => {
             const currentIndex = taskItem.getAttribute('index');
-            const taskName = localStorage.key(currentIndex);
+            const taskName = taskItemName.textContent;
             const taskData = JSON.parse(localStorage.getItem(taskName));    
             if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
-                //console.log(currentIndex);
                 createTaskModal(taskName,taskData.description, taskData.dueDate, taskData.effort, taskData.priority, currentIndex);
             }
         });
@@ -485,26 +484,15 @@ function updateTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
     }
 }   
 
-// editTaskButton.addEventListener('click', () => {
-//     //console.log(localStorage.key(i));
-//     const taskName = localStorage.key(editTaskButton.parentElement.getAttribute('index'));
-//     const taskData = JSON.parse(localStorage.getItem(taskName));    
-//     if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
-//         createTaskItem(taskName, taskData.description, taskData.dueDate, taskData.effort, taskData.priority);
-    
-    
-//     //console.log(taskIndex);
-
-//     createTaskModal(taskName,taskData.description, taskData.dueDate, taskData.effort, taskData.priority, editTaskButton.parentElement.getAttribute('index'));
-//     }
-//     createTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddDueDateInput.value.trim(), taskAddEffortInput.value.trim(), taskAddPrioritySelect.value.trim(), taskIndex);
-// });
-
 addTaskButton.addEventListener('click', () => {
     // indexTasks();
     createTaskModal();
 
 });
+
+function settingsModal(){
+
+}
 
 function deleteTaskItemModal(taskItem, taskName){
     const deleteModalDiv = document.createElement('div');
@@ -576,7 +564,6 @@ function taskItemDragAndDrop(){
 
 function indexTasks(){
     const taskItems = document.querySelectorAll('li.taskItem');
-    //console.log(taskItems);
 
     for(let j = 0; j < taskItems.length; j++){
         if (taskItems[j].getAttribute('index') != undefined){
@@ -592,7 +579,6 @@ function indexTasks(){
 function initTasks(){
     //Load tasks from local storage
     for (let i = 0; i < localStorage.length; i++){
-        //console.log(localStorage.key(i));
         const taskName = localStorage.key(i);
         const taskData = JSON.parse(localStorage.getItem(taskName));
         if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
