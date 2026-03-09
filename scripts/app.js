@@ -87,6 +87,8 @@ timerToggle.addEventListener('click', () => {
     }
 });
 
+let taskAddInput, taskAddDescInput, taskAddEffortInput, taskAddDueDateInput, taskAddPrioritySelect;
+
 function createTaskModal(taskName, taskDescription, taskDueDate, taskEffort, taskPriority, taskIndex) {
         taskAddModalDiv = document.createElement('div');
         taskAddModalDiv.classList.add('taskAddModalDiv');
@@ -205,8 +207,9 @@ function createTaskModal(taskName, taskDescription, taskDueDate, taskEffort, tas
             taskAddSubmit.textContent = 'Add Task';
         }
         if (taskIndex !== undefined) {
+            taskAddSubmit.setAttribute('data-task-index', taskIndex);
             taskAddSubmit.addEventListener('click', (event) => {
-                createTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddDueDateInput.value.trim(), taskAddEffortInput.value.trim(), taskAddPrioritySelect.value,taskAddSubmit.previousElementSibling.getAttribute('index'));
+                updateTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddDueDateInput.value.trim(), taskAddEffortInput.value.trim(), taskAddPrioritySelect.value, taskAddSubmit.getAttribute('data-task-index'));
                 document.body.removeChild(taskAddModalDiv);
             });
         }else {
@@ -238,13 +241,12 @@ function createTaskModal(taskName, taskDescription, taskDueDate, taskEffort, tas
 }
 
 function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, taskPriority, taskIndex) {
-    if (taskName === String) {
-        taskName = taskName.trim();
-    }
-    taskDescription = taskAddDescInput.value.trim();
-    taskEffort = taskAddEffortInput.value.trim();
-    taskDueDate = taskAddDueDateInput.value.trim();
-    taskPriority = taskAddPrioritySelect.value;
+    //console.log('New Task Created: ' + taskName);
+    taskName = taskName.trim();
+        //console.log('New Task Created: ' + taskName);
+    taskDescription = taskDescription.trim();
+    taskDueDate = taskDueDate.trim();
+    taskEffort = taskEffort.trim();
     //console.log(taskIndex);
     if (taskName !== '' && taskIndex === undefined) {
         const taskItem = document.createElement('li');
@@ -287,12 +289,13 @@ function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
         taskEditButtonIcon.classList.add('fa-solid', 'fa-pen-to-square', 'editIcon');
         taskEditButton.appendChild(taskEditButtonIcon);
         taskEditButton.addEventListener('click', () => {
-            taskEditName = taskItemName.textContent;
-            taskEditEffort = taskItemEffort.textContent.replace('hr', '').trim();
-            taskEditDueDate = taskItemDueDate.textContent.replace('Due: ', '').trim();
-            //taskEditDesc = editTaskButton.previousElementSibling.textContent();
-            createTaskModal(taskEditName, taskDescription, taskEditEffort, taskEditDueDate);
-            indexTasks();
+            const currentIndex = taskItem.getAttribute('index');
+            const taskName = localStorage.key(currentIndex);
+            const taskData = JSON.parse(localStorage.getItem(taskName));    
+            if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
+                //console.log(currentIndex);
+                createTaskModal(taskName,taskData.description, taskData.dueDate, taskData.effort, taskData.priority, currentIndex);
+            }
         });
         const taskDeleteButton = document.createElement('button');
         taskDeleteButton.classList.add('deleteTaskButton');
@@ -300,7 +303,7 @@ function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
         taskDeleteButtonIcon.classList.add('fa-solid', 'fa-trash-can', 'deleteIcon');
         taskDeleteButton.appendChild(taskDeleteButtonIcon);
         taskDeleteButton.addEventListener('click', () => {
-            deleteTaskItemModal(taskItem);
+            deleteTaskItemModal(taskItem,taskItemName.textContent);
         });
 
         taskItem.appendChild(taskItemEffortDiv);
@@ -312,7 +315,7 @@ function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
         taskList.appendChild(taskItem);
 
         //save description to local storage with task name as key and description as value
-        localStorage.setItem(taskName, taskDescription);
+        localStorage.setItem(taskName, JSON.stringify({description: taskDescription, dueDate: taskDueDate, effort: taskEffort, priority: taskPriority}));
     } else if (taskName !== '' && taskIndex !== undefined) {
         const taskItems = document.querySelectorAll('li.taskItem');
         const taskItem = taskItems[taskIndex];
@@ -331,20 +334,43 @@ function createTaskItem(taskName, taskDescription, taskDueDate, taskEffort, task
     indexTasks();
 }
 
-editTaskButton.addEventListener('click', () => {
-    //console.log(editTaskButton.previousElementSibling)
-    taskEditName = editTaskButton.previousElementSibling.previousElementSibling.textContent;
-    taskEditDescription = editTaskButton.previousElementSibling.textContent.trim();
-    taskEditDueDate = editTaskButton.previousElementSibling.querySelector('.taskItemDueDate').textContent.replace('Due: ', '').trim();
-    taskEditEffort = editTaskButton.previousElementSibling.previousElementSibling.previousElementSibling.textContent.replace('hr', '').trim();
-    taskEditPriority = editTaskButton.previousElementSibling.querySelector('.taskItemPriority').textContent;
-    const taskIndex = editTaskButton.closest('li.taskItem').getAttribute('index');
-    //console.log(taskIndex);
+function updateTaskItem(taskName, taskDescription, taskDueDate, taskEffort, taskPriority, taskIndex){
+    const taskItem = document.querySelector(`li.taskItem[index="${taskIndex}"]`);
+    console.log(taskItem);
+    const taskItemEffort = taskItem.querySelector('.taskItemEffort');
+    const taskItemName = taskItem.querySelector('.taskItemName');
+    const taskItemDueDate = taskItem.querySelector('.taskItemDueDate');
+    const taskItemPriority = taskItem.querySelector('.taskItemPriority');
+    taskItemEffort.textContent = `${taskEffort}hr`;
+    taskItemDueDate.textContent = `Due: ${taskDueDate}`;
+    taskItemPriority.textContent = taskPriority;
+    const taskItemPriorityDiv = taskItem.querySelector('.taskItemPriorityDiv');
+    taskItemPriorityDiv.style.backgroundColor =  taskPriority === 'Low' ? 'var(--low-priority)' : taskPriority === 'Medium' ? 'var(--normal-priority)' : 'var(--high-priority)';
 
-    createTaskModal(taskEditName,taskEditDescription,taskEditDueDate, taskEditEffort, taskEditPriority, taskIndex);
+    //update local storage
+    if (taskName !== taskItemName.textContent) {
+        taskItemName.textContent = taskName;
+        localStorage.removeItem(localStorage.key(taskIndex));
+        localStorage.setItem(taskName, JSON.stringify({description: taskDescription, dueDate: taskDueDate, effort: taskEffort, priority: taskPriority}));
+    } else {
+        localStorage.setItem(taskName, JSON.stringify({description: taskDescription, dueDate: taskDueDate, effort: taskEffort, priority: taskPriority}));
+    }
+}   
+
+// editTaskButton.addEventListener('click', () => {
+//     //console.log(localStorage.key(i));
+//     const taskName = localStorage.key(editTaskButton.parentElement.getAttribute('index'));
+//     const taskData = JSON.parse(localStorage.getItem(taskName));    
+//     if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
+//         createTaskItem(taskName, taskData.description, taskData.dueDate, taskData.effort, taskData.priority);
     
-    createTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddDueDateInput.value.trim(), taskAddEffortInput.value.trim(), taskAddPrioritySelect.value.trim(), taskIndex);
-});
+    
+//     //console.log(taskIndex);
+
+//     createTaskModal(taskName,taskData.description, taskData.dueDate, taskData.effort, taskData.priority, editTaskButton.parentElement.getAttribute('index'));
+//     }
+//     createTaskItem(taskAddInput.value.trim(), taskAddDescInput.value.trim(), taskAddDueDateInput.value.trim(), taskAddEffortInput.value.trim(), taskAddPrioritySelect.value.trim(), taskIndex);
+// });
 
 addTaskButton.addEventListener('click', () => {
     // indexTasks();
@@ -352,7 +378,7 @@ addTaskButton.addEventListener('click', () => {
 
 });
 
-function deleteTaskItemModal(taskItem){
+function deleteTaskItemModal(taskItem, taskName){
     const deleteModalDiv = document.createElement('div');
     deleteModalDiv.classList.add('deleteModalDiv');
 
@@ -367,6 +393,8 @@ function deleteTaskItemModal(taskItem){
     deleteConfirmButton.classList.add('deleteConfirmButton');
     deleteConfirmButton.textContent = 'Yes';
     deleteConfirmButton.addEventListener('click', () => {
+        //remove localStorage task item
+        localStorage.removeItem(taskName);
         taskList.removeChild(taskItem);
         document.body.removeChild(deleteModalDiv);
         indexTasks();
@@ -431,20 +459,12 @@ function indexTasks(){
         }
     }
     taskItemDragAndDrop();
-    //update local storage with all task names, descriptions, due dates, efforts, and priorities based on current order of task items
-    taskItems.forEach(taskItem => {
-        const taskName = taskItem.querySelector('.taskItemName').textContent;
-        const taskDescription = localStorage.getItem(taskName);
-        const taskDueDate = taskItem.querySelector('.taskItemDueDate').textContent.replace('Due: ', '').trim();
-        const taskEffort = taskItem.querySelector('.taskItemEffort').textContent.replace('hr', '').trim();
-        const taskPriority = taskItem.querySelector('.taskItemPriority').textContent.trim();
-        localStorage.setItem(taskName, JSON.stringify({description: taskDescription, dueDate: taskDueDate, effort: taskEffort, priority: taskPriority}));
-    });
 }
 
-function loadTasks(){
+function init(){
+    //Load tasks from local storage
     for (let i = 0; i < localStorage.length; i++){
-        console.log(localStorage.key(i));
+        //console.log(localStorage.key(i));
         const taskName = localStorage.key(i);
         const taskData = JSON.parse(localStorage.getItem(taskName));
         if (taskData && taskData.description && taskData.dueDate && taskData.effort && taskData.priority) {
@@ -453,6 +473,6 @@ function loadTasks(){
     }
 }
 
-loadTasks();
+init();
 
 
