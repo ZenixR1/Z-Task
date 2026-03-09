@@ -1,4 +1,131 @@
 
+
+//initilize app HTML
+function init(){
+    const root = document.getElementById('root');
+
+    const navBarDiv = document.createElement('div');
+        navBarDiv.classList.add('navBar');
+        root.appendChild(navBarDiv);
+        const headerDiv = document.createElement('div');
+            headerDiv.classList.add('header');
+            navBarDiv.appendChild(headerDiv);
+            const headerH2 = document.createElement('h2');
+                headerH2.textContent = "Zen Task & Timer";
+                headerDiv.appendChild(headerH2);
+        const loginDivDiv = document.createElement('div');
+            loginDivDiv.classList.add('loginDiv');
+            headerDiv.appendChild(headerH2);
+
+    const mainContainerDiv = document.createElement('div');
+        mainContainerDiv.classList.add('mainContainer');
+        root.appendChild(mainContainerDiv);
+
+        const welcomeAndTimerDivDiv = document.createElement('div');
+            welcomeAndTimerDivDiv.classList.add('welcomeAndTimerDiv');
+            mainContainerDiv.appendChild(welcomeAndTimerDivDiv);
+            const welcomeHeaderDivDiv = document.createElement('div');
+                welcomeHeaderDivDiv.classList.add('welcomeHeaderDiv');
+                welcomeAndTimerDivDiv.appendChild(welcomeHeaderDivDiv);
+                const welcomeHeaderH1 = document.createElement('h1');
+                    welcomeHeaderH1.classList.add('welcomeHeader')
+                    welcomeHeaderH1.textContent = 'Welcome, {Username}!';
+                    welcomeHeaderDivDiv.appendChild(welcomeHeaderH1);
+                const motdH4 = document.createElement('h4');
+                    motdH4.classList.add('motd');
+                    motdH4.textContent = "Message of the day:"
+                    welcomeHeaderDivDiv.appendChild(motdH4);
+                const motdContentP = document.createElement('p');
+                    motdContentP.classList.add('motdContent')
+                    motdContentP.textContent = 'I hope you have a productive day!';
+                    welcomeHeaderDivDiv.appendChild(motdContentP);
+            const timerDivDiv = document.createElement('div');
+                timerDivDiv.classList.add('timerDiv');
+                welcomeAndTimerDivDiv.appendChild(timerDivDiv);
+                const timerDiv = document.createElement('div');
+                    timerDiv.classList.add('timer');
+                    timerDivDiv.appendChild(timerDiv);
+                    const timerClockDiv = document.createElement('div');
+                        timerClockDiv.classList.add('timerClock');
+                        timerDiv.appendChild(timerClockDiv);
+                        const timerCountH2 = document.createElement('h2');
+                            timerCountH2.id = "timerCount";
+                            timerClockDiv.appendChild(timerCountH2);
+                    const controlBarDiv = document.createElement('div');
+                        controlBarDiv.classList.add('controlBar');
+                        timerDiv.appendChild(controlBarDiv);
+                        const line1DivDiv = document.createElement('div');
+                            line1DivDiv.classList.add('line1div');
+                            line1DivDiv.innerHTML = `<hr class="line1">`
+                            controlBarDiv.appendChild(line1DivDiv);
+                        const countdownButton = document.createElement('button');
+                            countdownButton.id = "countdown";
+                            countdownButton.textContent = 'Start';
+                            controlBarDiv.appendChild(countdownButton);
+                        const line2DivDiv = document.createElement('div');
+                            line2DivDiv.classList.add('line2div');
+                            line2DivDiv.innerHTML = `<hr class="line2">`
+                            controlBarDiv.appendChild(line2DivDiv);
+                    const workingOnDivDiv = document.createElement('div');
+                        workingOnDivDiv.classList.add('workingOnDiv');
+                        timerDiv.appendChild(workingOnDivDiv);
+                        const workingOnDivDivH2 = document.createElement('h2');
+                            workingOnDivDivH2.textContent = "Currently Working On:";
+                            workingOnDivDiv.appendChild(workingOnDivDivH2);
+                        const taskDisplayNameP = document.createElement('p');
+                            taskDisplayNameP.classList.add('taskDisplayName');
+                            workingOnDivDiv.appendChild(taskDisplayNameP);
+                        const taskPriorityLevelP = document.createElement('p');
+                            taskPriorityLevelP.classList.add('taskPriorityLevel');
+                            taskPriorityLevelP.textContent = 'priorityLevel';
+                            workingOnDivDiv.appendChild(taskPriorityLevelP);
+                        const taskDueDateP = document.createElement('p');
+                            taskDueDateP.classList.add('taskDueDate');
+                            taskDueDateP.innerHTML = `<strong>Due by: </strong>May 20th, 2025 @ 17:30</p>`;
+                            workingOnDivDiv.appendChild(taskDueDateP);
+                        const taskSummaryP = document.createElement('p');
+                            taskSummaryP.innerHTML = `<strong>Task Summary:</strong>`;
+                            workingOnDivDiv.appendChild(taskSummaryP);
+                        const taskDisplaySummaryP = document.createElement('p');
+                            taskDisplaySummaryP.classList.add('taskDisplaySummary');
+                            taskDisplaySummaryP.textContent = "This section will list out your task summary."
+                            workingOnDivDiv.appendChild(taskDisplaySummaryP);
+        const tasksDivDiv = document.createElement('div');
+            tasksDivDiv.classList.add('tasksDiv');
+            mainContainerDiv.appendChild(tasksDivDiv);
+            const taskHeaderDivDiv = document.createElement('div');
+                taskHeaderDivDiv.classList.add('taskHeaderDiv')
+                tasksDivDiv.appendChild(taskHeaderDivDiv);
+                const settingsDivDiv = document.createElement('div');
+                        settingsDivDiv.classList.add('settingsDiv');
+                        taskHeaderDivDiv.appendChild(settingsDivDiv);
+                        const sortButtonDiv = document.createElement('div');
+                            sortButtonDiv.classList.add('sortButtonDiv');
+                            settingsDivDiv.appendChild(sortButtonDiv);
+                        const filterButtonDiv = document.createElement('div');
+                            filterButtonDiv.classList.add('filterButtonDiv');
+                            settingsDivDiv.appendChild(filterButtonDiv);
+                const taskHeaderDiv = document.createElement('div');
+                    taskHeaderDiv.classList.add('taskHeader');
+                    taskHeaderDivDiv.appendChild(taskHeaderDiv);
+                    const taskHeadingH2 = document.createElement('h2');
+                        taskHeadingH2.classList.add('taskHeading');
+                        taskHeadingH2.textContent = "Tasks:";
+                        taskHeaderDiv.appendChild(taskHeadingH2);
+                const addTaskButton = document.createElement('button');
+                    addTaskButton.id = 'addTaskButton';
+                    addTaskButton.textContent = "+";
+                    taskHeaderDivDiv.appendChild(addTaskButton);
+            const taskContainerDiv = document.createElement('div');
+                taskContainerDiv.classList.add('taskContainerDiv');
+                tasksDivDiv.appendChild(taskContainerDiv)
+                const taskListUL = document.createElement('ul');
+                    taskListUL.classList.add('taskList');
+                    taskContainerDiv.appendChild(taskListUL);
+}
+
+init();
+
 //DOM for minutes
 const timerCount = document.getElementById('timerCount');
 //DOM for start/stop button
@@ -6,6 +133,7 @@ const timerToggle = document.getElementById('countdown');
 //DOM for the pomodoro timer container
 const timerDiv = document.querySelector('.timerDiv');
 //DOM for the add Task button
+
 const addTaskButton = document.getElementById('addTaskButton');
 //DOM for the TaskList container
 const taskList = document.querySelector('.taskList');
@@ -461,7 +589,7 @@ function indexTasks(){
     taskItemDragAndDrop();
 }
 
-function init(){
+function initTasks(){
     //Load tasks from local storage
     for (let i = 0; i < localStorage.length; i++){
         //console.log(localStorage.key(i));
@@ -473,6 +601,6 @@ function init(){
     }
 }
 
-init();
+initTasks();
 
 

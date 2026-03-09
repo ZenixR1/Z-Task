@@ -221,6 +221,11 @@ align-content: center;
     color: var(--white);
 }
 
+.taskHeading{
+    display: flex;
+    text-align: center;
+}
+
 #addTaskButton{
     display: flex;
     width: 4rem;

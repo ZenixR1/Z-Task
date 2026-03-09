@@ -16,59 +16,8 @@
         <link rel="stylesheet" href="./faicons/fontawesome-free-7.2.0-web/css/all.min.css">
     </head>
 <body>
-    <div class="navBar">
-        <div class="header">
-            <h2>Zen Task & Timer</h2>
-        </div>
-        <div class="loginDiv"></div>
+    <div id="root">
     </div>
-    <div class="mainContainer">
-        <div class="welcomeAndTimerDiv">
-            <div class="welcomeHeaderDiv">
-                <h1 class="welcomeHeader"> Welcome, {Username}!</h1>
-                <h4 class="motd">Message of the day:</h4>
-                <p class="motdContent">I hope you have a productive day!</p>
-            </div>
-        <div class="timerDiv">
-            <div class="timer">
-                <div class="timerClock">
-                    <h2 id="timerCount"></h2>
-                </div>
-                <div class="controlBar">
-                    <div class="line1div"><hr class="line1"></div>
-                    <button id="countdown">Start</button>
-                    <div class="line2div"><hr class="line2"></div>
-                </div>
-                <div class="workingOnDiv">
-                    <h2>Currently Working On:</h3>
-                    <p class="taskDisplayName"><strong>Task name here</strong></p>
-                    <p class="taskPriorityLevel">priorityLevel</p>
-                    <p class="taskDueDate"><strong>Due by: </strong>May 20th, 2025 @ 17:30</p>
-                    <p><strong>Task Summary:</strong></p>
-                    <p class="taskDisplaySummary">This section will list out your task summary</p>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="tasksDiv">
-                <div class="taskHeaderDiv">
-                    <div class="settingsDiv">
-                        <div class="sortButtonDiv"></div>
-                        <div class="filterButtonDiv"></div>
-                    </div>
-                    <div class="taskHeader">
-                        <h2 class="taskHeading">Tasks:</h2>
-                    </div>
-                    <button id="addTaskButton">+</button>
-                </div>
-                <div class="taskContainerDiv">
-                    <ul class="taskList">
-                        
-                    </ul>
-                </div>
-        </div>
-    </div>
-    <div class="footerDiv"></div>
     <script src="./scripts/app.js" ></script>
 </body>
 </html>
