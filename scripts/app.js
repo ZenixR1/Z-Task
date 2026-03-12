@@ -15,7 +15,7 @@ function init(){
                 headerDiv.appendChild(headerH2);
         const loginDivDiv = document.createElement('div');
             loginDivDiv.classList.add('loginDiv');
-            headerDiv.appendChild(headerH2);
+            headerDiv.appendChild(loginDivDiv);
 
     const mainContainerDiv = document.createElement('div');
         mainContainerDiv.classList.add('mainContainer');
